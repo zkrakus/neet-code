@@ -45,4 +45,21 @@ public static class SameBinaryTree
             && (TraverseTreeDFSAndCompare(q?.left, treeDFSQueue)) 
             && TraverseTreeDFSAndCompare(q?.right, treeDFSQueue);
     }
+
+    public static bool IsSameTree3(TreeNode p, TreeNode q)
+    {
+        if (p is null && q is not null)
+            return false;
+
+        if (p is not null && q is null)
+            return false;
+
+        if (p is null && q is null)
+            return true;
+
+        if (p is not null && q is not null && p.val == q.val)
+            return IsSameTree3(p.left, q.left) && IsSameTree3(p.right, q.right);
+
+        return false;
+    }
 }
