@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace neetcode.Trees;
 public static class SameBinaryTree
 {
-    public static bool IsSameTree(TreeNode p, TreeNode q)
+    public static bool IsSameTree(TreeNode? p, TreeNode? q)
     {
         if(p is null || q is null)
             return false;
@@ -46,7 +46,7 @@ public static class SameBinaryTree
             && TraverseTreeDFSAndCompare(q?.right, treeDFSQueue);
     }
 
-    public static bool IsSameTree3(TreeNode p, TreeNode q)
+    public static bool IsSameTree3(TreeNode? p, TreeNode? q)
     {
         if (p is null && q is not null)
             return false;
