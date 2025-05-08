@@ -14,7 +14,7 @@ public class MinHeap
 
     private void HeapifyUp(int index)
     {
-        // Keep bubbling the node up until it reaches the root or no swap is needed.
+        // Keep bubbling the node up until it reaches the root.
         while (index > 0)
         {
             // Memorize and understand this operation.

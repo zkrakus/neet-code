@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace neetcode.HeapAndPriorityQueue;
-public  class MaxHeap
+public class MaxHeap
 {
     private readonly List<int> _elements = new();
 
     public int Count => _elements.Count;
 
-    public int Peak() => _elements[0];
+    public int Peak() => _elements.Count == 0 ? throw new InvalidOperationException("Heap is empty") : _elements[0];
 
     private void Swap(int i, int j)
     {
@@ -35,23 +35,23 @@ public  class MaxHeap
 
     private void HeapifyDown(int parentIndex)
     {
-        while(parentIndex < Count)
+        while (parentIndex < Count)
         {
             var leftChildIndex = 2 * parentIndex + 1;
             var rightChildIndex = 2 * parentIndex + 2;
-            var smallest = parentIndex;
+            var largest = parentIndex;
 
-            if (leftChildIndex < Count && _elements[leftChildIndex] < _elements[smallest])
-                smallest = leftChildIndex;
+            if (leftChildIndex < Count && _elements[leftChildIndex] >= _elements[largest])
+                largest = leftChildIndex;
 
-            if (rightChildIndex < Count && _elements[rightChildIndex] < _elements[smallest])
-                smallest = rightChildIndex;
+            if (rightChildIndex < Count && _elements[rightChildIndex] >= _elements[largest])
+                largest = rightChildIndex;
 
-            if (smallest == parentIndex)
+            if (largest == parentIndex)
                 break;
 
-            Swap(smallest, parentIndex);
-            parentIndex = smallest;
+            Swap(largest, parentIndex);
+            parentIndex = largest;
         }
     }
 
@@ -60,7 +60,11 @@ public  class MaxHeap
         while (childIndex > 0)
         {
             var parentIndex = (childIndex - 1) / 2;
+            if (_elements[childIndex] < _elements[parentIndex])
+                break;
 
+            Swap(childIndex, parentIndex);
+            childIndex = parentIndex;
         }
     }
 }
