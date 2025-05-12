@@ -30,12 +30,11 @@ public static class Subsets
 
             // Include nums[i] in the subset.
             subset.Add(nums[i]);
-            // Recurse to process the next index.
+            // Recurse to process the next and subsequent indexes then backtrack.
             DepthFirstSearch(i + 1);
 
-            // Backtrack: remove the previously included element.
+            // Remove the previously included element.
             subset.RemoveAt(subset.Count - 1);
-
             // Recurse without including nums[i] in the subset.
             DepthFirstSearch(i + 1);
         }
