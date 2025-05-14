@@ -16,40 +16,33 @@ public class ThreeSum
         int[] numsCopy = nums.ToArray();
         Array.Sort(numsCopy);
 
-        int i = 0;
-        while (i < numsCopy.Length)
+        for(int i  = 0; i < numsCopy.Length; i++)
         {
-            while (i < numsCopy.Length - 2 && numsCopy[i] == numsCopy[i+1])
-                i++;
+            var val = numsCopy[i];
 
-            int j = i + 1, k = numsCopy.Length - 1;
-            while (j < k)
+            if (i > 0 && val == numsCopy[i - 1])
+                continue;
+
+            int l = i + 1, r = numsCopy.Length - 1;
+            while(l < r)
             {
-                while (j < k && numsCopy[j] == numsCopy[j + 1])
-                    j++;
-
-                while (j < k && numsCopy[k] == numsCopy[k - 1])
-                    k--;
-
-                var current = numsCopy[i] + numsCopy[j] + numsCopy[k];
-                if (current == 0)
+                var threeSum = val + numsCopy[l] + numsCopy[r];
+                if (threeSum > 0)
+                    r--;
+                else if (threeSum < 0)
+                    l++;
+                else
                 {
-                    result.Add(new List<int>() { i, j, k });
-                    i++;
-                    j++;
+                    result.Add(new List<int>() {i, l, r });
+                    l++;
+                    while (numsCopy[l] == numsCopy[l-1] && l < r)
+                    {
+                        l++;
+                    }
                 }
-
-                if (current > 0)
-                    k--;
-
-                if (current < 0)
-                    j++;
+               
             }
-           
-
-            i++;
         }
-
 
         return result;
     }
