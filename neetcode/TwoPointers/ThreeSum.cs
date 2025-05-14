@@ -33,7 +33,7 @@ public class ThreeSum
                     l++;
                 else
                 {
-                    result.Add(new List<int>() {i, l, r });
+                    result.Add(new List<int>() {val, numsCopy[l], numsCopy[r] });
                     l++;
                     while (numsCopy[l] == numsCopy[l-1] && l < r)
                     {
