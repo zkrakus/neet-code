@@ -12,33 +12,43 @@ public static class BinarySearch
     /// s: O(1)
     /// t: O(log(n))
     /// </summary>
-    public static int Search(int[] nums, int target)
+    public static int BinarySearchRec(int[] nums, int target)
     {
-        if (nums.Length == 0)
+        if (nums is null || nums.Length == 0)
             return -1;
 
-        var i = 0;
-        var j = nums.Length - 1;
-        while (j >= i)
+        int BinarySearchRecursive(int left, int right)
         {
-            var mid = i + (j - i) / 2;
+            if (left > right) return -1;
 
-            if (target == nums[mid])
-                return mid;
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) return mid;
 
-            if (target < nums[mid])
-                j = mid - 1;
+            if (nums[mid] > target)
+                return BinarySearchRecursive(left, mid - 1);
             else
-                i = mid + 1;
+                return BinarySearchRecursive(mid + 1, right);
         }
 
-        return -1;
+        return BinarySearchRecursive(0, nums.Length - 1);
+    }
+
+    public static int BinarySearchIt(int[] nums, int target)
+    {
+        if (nums is null || nums.Length == 0)
+            return -1;
+
+        int left = 0, right = nums.Length - 1;
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            int cur = nums[mid];
+
+            if (cur == target) return mid;
+            else if (target < cur) right = mid - 1;
+            else left = mid + 1;
+        }
+
+        return - 1;
     }
 }
-
-
-
-
-
-
-
