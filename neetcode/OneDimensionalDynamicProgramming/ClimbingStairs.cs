@@ -9,34 +9,36 @@ public static class ClimbingStairs
 {
     public static int ClimbStairs(int n)
     {
-        int one = 1, two = 1;
+        if (n < 0)
+            return 0;
+        if (n == 0)
+            return 1;
+        if (n == 1) 
+            return 1;
 
-        for (int i = 0; i < n; i++) {
-            var tmp = one;
-            one = one + two;
-            two = tmp;
+        int nMinus1 = 1; 
+        int nMinus2 = 1;
+        for (int i = 2; i <= n; i ++)
+        {
+            var tmp = nMinus1;
+            nMinus1 = nMinus1 + nMinus2;
+            nMinus2 = tmp;
         }
 
-        return one;
+        return nMinus1;
     }
 
     public static int ClimbStairsBrute(int n)
     {
-        int result1 = ClimbStairsRecursive(0, 1, n);
-        int result2 = ClimbStairsRecursive(0, 2, n);
+        int ClimbStairsRecursive(int cur, int n)
+        {
+            if (cur == n) return 1;
+            if (cur > n) return 0;
 
-        return result1 + result2;
-    }
+            return ClimbStairsRecursive(cur + 1, n) + ClimbStairsRecursive(cur + 2, n);
+        }
 
-    public static int ClimbStairsRecursive(int cur, int steps, int n)
-    {
-        cur += steps;
-        
-        if (cur == n) return 1;
-        if (cur > n) return 0;
-        
-        return ClimbStairsRecursive(cur, 1, n) + ClimbStairsRecursive(cur, 2, n);
-        
+        return ClimbStairsRecursive(1, n) + ClimbStairsRecursive(2, n);
     }
 
     public static int ClimbMemoized(int n)
@@ -50,25 +52,13 @@ public static class ClimbingStairs
         if (cur == n) return 1;
         if (cur > n) return 0;
 
-        if (dp.ContainsKey(cur)) return dp[cur];
+        if (dp.ContainsKey(cur))
+            return dp[cur];
 
         int result = ClimbStairsMemoizedRecursive(cur + 1, n, dp)
                + ClimbStairsMemoizedRecursive(cur + 2, n, dp);
 
         dp[cur] = result;
         return result;
-    }
-
-    public static int ClimbStairsOptimal(int n)
-    {
-        int one = 1, two = 2;
-        for(int i = 3; i <= n; i++)
-        {
-            var temp = one;
-            one = one + two;
-            two = temp;
-        }
-
-        return one;
     }
 }

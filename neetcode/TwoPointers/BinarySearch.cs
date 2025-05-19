@@ -9,7 +9,7 @@ namespace neetcode.TwoPointers;
 public static class BinarySearch
 {
     /// <summary>
-    /// s: O(1)
+    /// s: O(log(n)) Log of n space because uses the call stack for left and right.
     /// t: O(log(n))
     /// </summary>
     public static int BinarySearchRec(int[] nums, int target)
@@ -33,6 +33,10 @@ public static class BinarySearch
         return BinarySearchRecursive(0, nums.Length - 1);
     }
 
+    /// <summary>
+    /// s: O(1)
+    /// t: O(log(n))
+    /// </summary>
     public static int BinarySearchIt(int[] nums, int target)
     {
         if (nums is null || nums.Length == 0)
