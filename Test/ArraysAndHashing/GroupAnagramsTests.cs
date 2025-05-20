@@ -10,7 +10,7 @@ public class GroupAnagramsTests
         var input = new[] { "eat", "tea", "tan", "ate", "nat", "bat" };
 
         // Act
-        var result = GroupAnagrams.DoGroupAnagrams(input);
+        var result = GroupAnagrams.DoGroupAnagramsWithSort(input);
 
         // Assert
         Assert.Equal(3, result.Count);
@@ -23,7 +23,7 @@ public class GroupAnagramsTests
     public void GroupAnagrams_WithNoAnagrams_ReturnsAllSingleGroups()
     {
         var input = new[] { "abc", "def", "ghi" };
-        var result = GroupAnagrams.DoGroupAnagrams(input);
+        var result = GroupAnagrams.DoGroupAnagramsWithSort(input);
 
         Assert.Equal(3, result.Count);
         foreach (var word in input)
@@ -36,7 +36,7 @@ public class GroupAnagramsTests
     public void GroupAnagrams_WithEmptyArray_ReturnsEmptyList()
     {
         var input = new string[0];
-        var result = GroupAnagrams.DoGroupAnagrams(input);
+        var result = GroupAnagrams.DoGroupAnagramsWithSort(input);
 
         Assert.Empty(result);
     }
@@ -45,7 +45,7 @@ public class GroupAnagramsTests
     public void GroupAnagrams_WithSingleElement_ReturnsSingleGroup()
     {
         var input = new[] { "solo" };
-        var result = GroupAnagrams.DoGroupAnagrams(input);
+        var result = GroupAnagrams.DoGroupAnagramsWithSort(input);
 
         Assert.Single(result);
         Assert.Single(result[0]);
@@ -56,7 +56,7 @@ public class GroupAnagramsTests
     public void GroupAnagrams_WithDuplicates_GroupsTogether()
     {
         var input = new[] { "abc", "bca", "cab", "abc" };
-        var result = GroupAnagrams.DoGroupAnagrams(input);
+        var result = GroupAnagrams.DoGroupAnagramsWithSort(input);
 
         Assert.Single(result.Where(group => group.Contains("abc") && group.Contains("bca") && group.Contains("cab")));
         Assert.Equal(4, result.SelectMany(g => g).Count());
