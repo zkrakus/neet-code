@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace neetcode.ArraysAndHashing;
 public static class GroupAnagrams
@@ -33,18 +34,27 @@ public static class GroupAnagrams
     public static List<List<string>> DoGroupAnagramsWithCharacterMap(string[] strs)
     {
         Dictionary<string, List<string>> anagramDictionary = new();
+        Span<int> tmpArrayCharMap = stackalloc int[26];
         foreach (string str in strs)
         {
-            var tmpArrayCharMap = new int[26];
+            tmpArrayCharMap.Clear();
+
             foreach (char c in str)
                 tmpArrayCharMap[c - 'a']++;
 
-            // Use string builder instead of join since join continually rebuilds and recopies strings instead of doing it once.
-            var key = string.Join("|", tmpArrayCharMap);
-            if (anagramDictionary.TryGetValue(key, out var anagrams))
-                anagrams.Add(str);
-            else
-                anagramDictionary.Add(key, new List<string>() { str });
+            // 25 Seperators + ~2 digit numbers ~75-100 character buffer to prevent sb recurring heap allocations. 
+            var sb = new StringBuilder(100);
+            for (int i = 0; i < 26; i++)
+            {
+                sb.Append(tmpArrayCharMap[i]);
+                sb.Append('|');
+            }
+            string key = sb.ToString();
+
+            if (!anagramDictionary.TryGetValue(key, out var group))
+                anagramDictionary[key] = group = new List<string>();
+
+            group.Add(str);
         }
 
         return anagramDictionary.Values.ToList();
