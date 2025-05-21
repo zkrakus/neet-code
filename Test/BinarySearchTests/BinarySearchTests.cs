@@ -1,11 +1,11 @@
-﻿using neetcode.TwoPointers;
+﻿using neetcode.BinarySearch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.TwoPointers;
+namespace Test.BinarySearchTests;
 
 public class BinarySearchTests
 {

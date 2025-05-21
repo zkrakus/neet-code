@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.TwoPointers;
+﻿namespace neetcode.BinarySearch;
 public static class BinarySearch
 {
     /// <summary>
@@ -53,6 +46,6 @@ public static class BinarySearch
             else left = mid + 1;
         }
 
-        return - 1;
+        return -1;
     }
 }
