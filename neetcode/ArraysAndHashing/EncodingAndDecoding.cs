@@ -19,8 +19,8 @@ public static class EncodingAndDecoding
 
     public static List<string> Decode(string s)
     {
-        List<string> decodedList = new ();
-        List<char> numericChars = new List<char>();
+        List<string> decodedList = new();
+        List<char> numericChars = new();
         for(int i = 0; i < s.Length; i++)
         {
             char c = s[i];
