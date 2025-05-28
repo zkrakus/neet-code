@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.ArraysAndHashing;
+﻿namespace neetcode.ArraysAndHashing;
 public static class TwoSum
 {
     public static int[] Sum(int[] nums, int target)
