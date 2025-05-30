@@ -25,9 +25,13 @@ public static class LastStoneWeight
             var stone2 = minHeap.Dequeue();
 
             if (stone1 > stone2)
+            {
                 stone1 -= stone2;
+            }
             else if (stone2 > stone1)
+            {
                 stone1 = stone2 - stone1;
+            }
             else
             {
                 if (minHeap.Count > 0)

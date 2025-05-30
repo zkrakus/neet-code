@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace neetcode.HeapAndPriorityQueue;
 public class KthLargestElementInAStream
 {
-    private PriorityQueue<int, int> _minHeap = new();
-    private int? k = null;
+    private readonly PriorityQueue<int, int> _minHeap = new();
+    private readonly int? k = null;
 
     public KthLargestElementInAStream(int k, int[] nums)
     {

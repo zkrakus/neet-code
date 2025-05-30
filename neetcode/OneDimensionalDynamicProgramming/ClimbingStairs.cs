@@ -21,7 +21,7 @@ public static class ClimbingStairs
         for (int i = 2; i <= n; i ++)
         {
             var tmp = nMinus1;
-            nMinus1 = nMinus1 + nMinus2;
+            nMinus1 += nMinus2;
             nMinus2 = tmp;
         }
 
@@ -30,7 +30,7 @@ public static class ClimbingStairs
 
     public static int ClimbStairsBrute(int n)
     {
-        int ClimbStairsRecursive(int cur, int n)
+        static int ClimbStairsRecursive(int cur, int n)
         {
             if (cur == n) return 1;
             if (cur > n) return 0;
@@ -52,8 +52,8 @@ public static class ClimbingStairs
         if (cur == n) return 1;
         if (cur > n) return 0;
 
-        if (dp.ContainsKey(cur))
-            return dp[cur];
+        if (dp.TryGetValue(cur, out int value))
+            return value;
 
         int result = ClimbStairsMemoizedRecursive(cur + 1, n, dp)
                + ClimbStairsMemoizedRecursive(cur + 2, n, dp);

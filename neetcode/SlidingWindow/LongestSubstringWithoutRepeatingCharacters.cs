@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace neetcode.LinkedList;
+namespace neetcode.SlidingWindow;
 public static class LongestSubstringWithoutRepeatingCharacters
 {
     public static int LengthOfLongestSubstring(string s)

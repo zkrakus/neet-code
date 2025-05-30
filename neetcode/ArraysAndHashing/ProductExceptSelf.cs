@@ -52,7 +52,7 @@ public static class ProductExceptSelf
         }
 
         var postfix = 1;
-        for(int i = n - 2; i <= 0; i--)
+        for(int i = n - 1; i >= 0; i--)
         {
             result[i] *= postfix;
             postfix *= nums[i];

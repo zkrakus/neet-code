@@ -9,7 +9,7 @@ public static class EncodingAndDecoding
 {
     public static string Encode(IList<string> strs)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         foreach (string str in strs)
             sb.Append($"{str.Length}|{str}");

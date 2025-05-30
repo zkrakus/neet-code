@@ -16,7 +16,7 @@ public static class SearchA2DMatrix
         while (i <= j)
         {
             int mid = i + (j - i) / 2;
-            if (target >= matrix[mid][0] && target <= matrix[mid][matrix[mid].Length - 1])
+            if (target >= matrix[mid][0] && target <= matrix[mid][^1])
             {
                 int k = 0, m = matrix[mid].Length - 1;
                 while (k <= m)
@@ -42,7 +42,7 @@ public static class SearchA2DMatrix
             {
                 j = mid - 1;
             }
-            else if (target > matrix[mid][matrix[mid].Length - 1])
+            else if (target > matrix[mid][^1])
             {
                 i = mid + 1;
             }

@@ -77,8 +77,8 @@ public static class ValidAnagram
 
         for (int i = 0; i < s.Length; i++)
         {
-            charArray[getIndex(s[i])]++;
-            charArray[getIndex(t[i])]--;
+            charArray[GetIndex(s[i])]++;
+            charArray[GetIndex(t[i])]--;
         }
 
         foreach (var i in charArray)
@@ -89,7 +89,7 @@ public static class ValidAnagram
         return true;
     }
 
-    private static int getIndex(char c)
+    private static int GetIndex(char c)
     {
         if (char.IsLower(c)) return c - 'a';
         if (char.IsUpper(c)) return c - 'A' + 26;

@@ -31,7 +31,7 @@ public static class KokoEatingBananas
             }
         }
 
-        bool CanEatAll(int[] piles, int h, int speed)
+        static bool CanEatAll(int[] piles, int h, int speed)
         {
             int totalHours = 0;
             foreach (var pile in piles)
