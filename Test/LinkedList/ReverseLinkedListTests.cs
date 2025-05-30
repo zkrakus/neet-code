@@ -9,7 +9,7 @@ namespace Test.LinkedList;
 
 public class ReverseLinkedListTests
 {
-    private ListNode BuildList(int[] values)
+    private static ListNode BuildList(int[] values)
     {
         if (values == null || values.Length == 0) return null!;
         var head = new ListNode(values[0]);
@@ -22,7 +22,7 @@ public class ReverseLinkedListTests
         return head;
     }
 
-    private int[] ToArray(ListNode head)
+    private static int[] ToArray(ListNode? head)
     {
         var result = new List<int>();
         var current = head;
@@ -38,7 +38,7 @@ public class ReverseLinkedListTests
     public void SingleNodeList_ReturnsSameNode()
     {
         var head = BuildList(new[] { 1 });
-        var result = ReverseLinkedList.ReverseList(head);
+        var result = ReverseLinkedList.ReverseListRecursive(head);
         Assert.Equal(new[] { 1 }, ToArray(result));
     }
 
@@ -46,7 +46,7 @@ public class ReverseLinkedListTests
     public void TwoNodeList_IsReversed()
     {
         var head = BuildList(new[] { 1, 2 });
-        var result = ReverseLinkedList.ReverseList(head);
+        var result = ReverseLinkedList.ReverseListRecursive(head);
         Assert.Equal(new[] { 2, 1 }, ToArray(result));
     }
 
@@ -54,14 +54,14 @@ public class ReverseLinkedListTests
     public void MultiNodeList_IsReversed()
     {
         var head = BuildList(new[] { 1, 2, 3, 4, 5 });
-        var result = ReverseLinkedList.ReverseList(head);
+        var result = ReverseLinkedList.ReverseListRecursive(head);
         Assert.Equal(new[] { 5, 4, 3, 2, 1 }, ToArray(result));
     }
 
     [Fact]
     public void NullHead_ReturnsNull()
     {
-        var result = ReverseLinkedList.ReverseList(null!);
+        var result = ReverseLinkedList.ReverseListRecursive(null!);
         Assert.Null(result);
     }
 
@@ -69,7 +69,7 @@ public class ReverseLinkedListTests
     public void ListWithDuplicateValues_IsReversed()
     {
         var head = BuildList(new[] { 1, 2, 3, 2, 1 });
-        var result = ReverseLinkedList.ReverseList(head);
+        var result = ReverseLinkedList.ReverseListRecursive(head);
         Assert.Equal(new[] { 1, 2, 3, 2, 1 }, ToArray(result));
     }
 }

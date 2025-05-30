@@ -3,21 +3,43 @@
 public static class ReverseLinkedList
 {
 
-    public static ListNode? ReverseList(ListNode head)
+    public static ListNode? ReverseList(ListNode? head)
     {
         if (head is null || head.next is null)
             return head;
 
+        ListNode cur = head;
         ListNode prev = null!;
-        var cur = head;
         while (cur != null)
         {
-            var temp = cur.next; // keep track of next
-            cur.next = prev; // set the next to prevoius ... starts as null. First iteration this will set next to null which will be our ending delimeter.
-            prev = cur; // set the new previous to current
-            cur = temp; // set the new current to the next value
+            ListNode tmp = cur.next!;
+            cur.next = prev;
+            prev = cur;
+            cur = tmp;
         }
 
         return prev;
+    }
+
+    public static ListNode? ReverseListRecursive(ListNode? head)
+    {
+        if (head is null || head.next is null)
+            return head;
+
+
+        static ListNode? ReverseListRec(ListNode? cur, ListNode? prev)
+        {
+            if (cur is null)
+                return prev;
+
+            var tmp = cur.next;
+            cur.next = prev!;
+            prev = cur;
+            cur = tmp;
+
+            return ReverseListRec(cur, prev);
+        }
+
+        return ReverseListRec(head, null);
     }
 }
