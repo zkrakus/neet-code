@@ -12,53 +12,67 @@ public class ThreeSumTests
     [Fact]
     public void ReturnsEmptyList_WhenInputIsNull()
     {
-        var result = ThreeSum.Sum(null);
+        var result = ThreeSum.Sum2(null);
         Assert.Empty(result);
     }
 
     [Fact]
     public void ReturnsEmptyList_WhenInputHasLessThanThreeElements()
     {
-        var result = ThreeSum.Sum(new int[] { 1 });
-        Assert.Empty(result);
-
-        result = ThreeSum.Sum(new int[] { 1, 2 });
-        Assert.Empty(result);
+        Assert.Empty(ThreeSum.Sum2(new int[] { 1 }));
+        Assert.Empty(ThreeSum.Sum2(new int[] { 1, 2 }));
     }
 
     [Fact]
-    public void ReturnsCorrectIndices_ForSampleInput1()
+    public void ReturnsCorrectTriplets_ForSampleInput1()
     {
-        var result = ThreeSum.Sum(new int[] { -1, 0, 1, 2, -1, -4 });
-        Assert.Contains(result, triplet => triplet.Count == 3);
+        var result = ThreeSum.Sum2(new int[] { -1, 0, 1, 2, -1, -4 });
+
+        var expected = new List<List<int>>
+        {
+            new() { -1, -1, 2 },
+            new() { -1, 0, 1 }
+        };
+
+        Assert.Equal(expected.Count, result.Count);
+        foreach (var triplet in expected)
+        {
+            Assert.Contains(result, r => r.OrderBy(x => x).SequenceEqual(triplet.OrderBy(x => x)));
+        }
     }
 
     [Fact]
     public void ReturnsEmptyList_WhenNoTripletsSumToZero()
     {
-        var result = ThreeSum.Sum(new int[] { 0, 1, 1 });
+        var result = ThreeSum.Sum2(new int[] { 0, 1, 1 });
         Assert.Empty(result);
     }
 
     [Fact]
     public void ReturnsEmptyList_WhenTripletSumNotZero()
     {
-        var result = ThreeSum.Sum(new int[] { 3, -2, 1, 0 });
+        var result = ThreeSum.Sum2(new int[] { 3, -2, 1, 0 });
         Assert.Empty(result);
     }
 
     [Fact]
     public void HandlesAllZeros()
     {
-        var result = ThreeSum.Sum(new int[] { 0, 0, 0 });
-        Assert.Contains(result, triplet => triplet.Count == 3);
+        var result = ThreeSum.Sum2(new int[] { 0, 0, 0 });
+
+        var expected = new List<int> { 0, 0, 0 };
+        Assert.Single(result);
+        Assert.True(result[0].OrderBy(x => x).SequenceEqual(expected));
     }
 
     [Fact]
-    public void ReturnsCorrectIndices_ForValidTriplet()
+    public void ReturnsCorrectTriplet_ForValidSimpleInput()
     {
-        var result = ThreeSum.Sum(new int[] { 1, 2, -3 });
-        Assert.Contains(new List<int> { 0, 1, 2 }, result);
+        var result = ThreeSum.Sum2(new int[] { 1, 2, -3 });
+
+        var expected = new List<int> { -3, 1, 2 };
+        Assert.Single(result);
+        Assert.True(result[0].OrderBy(x => x).SequenceEqual(expected));
     }
 }
 

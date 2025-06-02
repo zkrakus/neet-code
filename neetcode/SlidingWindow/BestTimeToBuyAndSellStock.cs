@@ -13,9 +13,7 @@ public static class BestTimeToBuyAndSellStock
             return 0;
 
         int minPricePointer = 0;
-        int maxPricePointer = 0;
-        int maxProfit = prices[maxPricePointer] - prices[minPricePointer];
-
+        int maxProfit = 0;
         for (int i = 1; i < prices.Length; i++)
         {
             var profit = prices[i] - prices[minPricePointer];
@@ -23,8 +21,6 @@ public static class BestTimeToBuyAndSellStock
 
             if (prices[i] < prices[minPricePointer])
                 minPricePointer = i;
-            else if (prices[i] > prices[maxPricePointer])
-                maxPricePointer = i;
         }
 
         return maxProfit;
