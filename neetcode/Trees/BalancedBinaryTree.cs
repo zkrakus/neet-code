@@ -48,7 +48,7 @@ public static class BalancedBinaryTree
     public static bool IsBalanced(TreeNode? root)
     {
         bool isBalanced = true;
-        int IsBalancedRec(TreeNode node, int depth)
+        int IsBalancedRec(TreeNode? node, int depth)
         {
             if (node == null || isBalanced == false)
                 return 0;

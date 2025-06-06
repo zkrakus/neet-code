@@ -1,4 +1,6 @@
-﻿namespace neetcode.Trees;
+﻿using System.Security.AccessControl;
+
+namespace neetcode.Trees;
 public static class SubtreeOfAnotherTree
 {
     // Review this solution.
@@ -13,7 +15,7 @@ public static class SubtreeOfAnotherTree
             return false;
 
 
-        if(SameBinaryTree(root, subRoot))
+        if (SameBinaryTree(root, subRoot))
             return true;
 
         return IsSubtree(root!.left, subRoot) || IsSubtree(root.right, subRoot);
