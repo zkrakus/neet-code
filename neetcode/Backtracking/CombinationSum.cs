@@ -3,32 +3,33 @@ public static class CombinationSum
 {
     public static List<List<int>> DoCombinationSum(int[] nums, int target)
     {
-        List<List<int>> result = new();
+        List<List<int>> result = new() { };
+        if (nums is null || nums.Length == 0)
+            return result;
+
         List<int> combination = new();
-
-        void DFS(int i, int total)
+        void SumRec(int i = 0, int total = 0)
         {
-            if(total == target)
+            if (total == target)
             {
-                result.Add(new List<int>(combination));
+                result.Add(combination.ToList());
                 return;
             }
 
-            if (i >= nums.Length || total > target)
-            {
+            if (i == nums.Length || total > target)
                 return;
-            }
 
+            // Include nums[i]
             combination.Add(nums[i]);
-            DFS(i, total + nums[i]);
-
+            SumRec(i, total + nums[i]);
+            
+            // Excluse nums[i]
             combination.RemoveAt(combination.Count - 1);
-            DFS(i + 1, total);
+            SumRec(i + 1, total);
         }
 
-        DFS(0, 0);
+        SumRec();
 
         return result;
     }
-
 }

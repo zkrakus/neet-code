@@ -9,34 +9,29 @@ using System.Threading.Tasks;
 namespace neetcode.Backtracking;
 public static class Subsets
 {
-    public static List<List<int>> FindSubsets(int[] nums)
+    public static List<List<int>>? FindSubsets(int[] nums)
     {
-        List<List<int>> result = new();
-        List<int> subset = new();
+        if (nums is null)
+            return null;
 
-        // Start building all subsets starting from index 0;
-        DepthFirstSearch(0);
-
-        return result;
-
-        void DepthFirstSearch(int i)
+        List<List<int>> result = new List<List<int>>();
+        List<int> subset = new List<int>();
+        void FindSubsetsRec(int i, List<int> subset)
         {
-            // All decisions (include/exclude) have been made for each element — save the current subset.
-            if (i >= nums.Length)
+            if (i == nums.Length)
             {
-                result.Add(new List<int>(subset));
+                result.Add(subset.ToList());
                 return;
             }
 
-            // Include nums[i] in the subset.
             subset.Add(nums[i]);
-            // Recurse to process the next and subsequent indexes then backtrack.
-            DepthFirstSearch(i + 1);
-
-            // Remove the previously included element.
+            FindSubsetsRec(i + 1, subset);
             subset.RemoveAt(subset.Count - 1);
-            // Recurse without including nums[i] in the subset.
-            DepthFirstSearch(i + 1);
+            FindSubsetsRec(i + 1, subset);
         }
+
+        FindSubsetsRec(0, subset);
+
+        return result;
     }
 }
