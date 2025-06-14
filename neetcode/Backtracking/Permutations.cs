@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace neetcode.Backtracking;
 public static class Permutations
 {
-    public static List<List<int>> Permutes(int[] nums)
+    public static List<List<int>> PermuteRecursive(int[] nums)
     {
         if (nums is null || nums.Length == 0)
             return new List<List<int>>();
