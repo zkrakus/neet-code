@@ -1,6 +1,18 @@
 ﻿namespace neetcode.Backtracking;
 public static class Subsets
 {
+    public static IList<IList<int>> SubsetsIterative(int[] nums)
+    {
+        var result = new List<IList<int>> { new List<int>() };
+
+        foreach (int num in nums) // for every number in nums
+            foreach (var subSet in result) // we take every subSet starting from the the emtpy set
+                result.Add(new List<int>(subSet.ToList()) { num });  // we copy the subset, add nth number to the new subset, and add the new subset to the result set.
+
+        return result;
+    }
+
+
     public static List<List<int>>? FindSubsets(int[] nums)
     {
         if (nums is null)
@@ -27,28 +39,9 @@ public static class Subsets
         return result;
     }
 
-    public static IList<IList<int>> SubsetsIterative(int[] nums)
-    {
-        var result = new List<IList<int>> { new List<int>() };
-
-        foreach (int num in nums)
-        {
-            int count = result.Count;
-            for (int i = 0; i < count; i++)
-            {
-                var newSubset = new List<int>(result[i]) { num };
-                result.Add(newSubset);
-            }
-        }
-
-        return result;
-    }
-
     public static IList<IList<int>> SubsetsBacktracking(int[] nums)
     {
         var result = new List<IList<int>>();
-        Backtrack(0, new List<int>());
-        return result;
 
         void Backtrack(int start, List<int> path)
         {
@@ -61,5 +54,9 @@ public static class Subsets
                 path.RemoveAt(path.Count - 1); // undo step
             }
         }
+
+        Backtrack(0, new List<int>());
+
+        return result;
     }
 }
