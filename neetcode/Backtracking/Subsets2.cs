@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.Backtracking;
+﻿namespace neetcode.Backtracking;
 public static class Subsets2
 {
     public static List<List<int>> SubsetsWithDup(int[] nums)
@@ -12,10 +6,9 @@ public static class Subsets2
         if (nums is null)
             return new List<List<int>>() { };
 
-        List<int> numsCopy = nums.ToList();
-        numsCopy.Sort();
         List<List<int>> result = new();
         List<int> subset = new();
+        List<int> numsCopy = nums.OrderBy(n => n).ToList();
         void Backtrack(int i = 0)
         {
             if (i >= numsCopy.Count)
