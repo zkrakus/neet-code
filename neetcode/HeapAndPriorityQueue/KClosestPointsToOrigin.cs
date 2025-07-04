@@ -9,8 +9,8 @@ public class KClosestPointsToOrigin
         PriorityQueue<(int[] point, int priority), int> maxHeap = new(Comparer<int>.Create((a, b) => b.CompareTo(a)));
         foreach (var point in points)
         {
-            // We technically can just use a **2 = b**2 because we care about relative distance by priority not the distance itself.
-            // Using the distance itself will fuck shit up because of the folloring operation. We would have to use decimals or doubles.
+            // We technically can just use a**2 = b**2 because we care about relative distance by priority not the distance itself.
+            // Using the distance itself will fuck shit up because of the sqrt operation ... we would have to use decimals or doubles.
             var distanceSquared = (point[0] * point[0]) + (point[1] * point[1]);
 
             // insert anything that's smaller than the smallest number. Will need to dequeue k, but minHeap will likely be larger than k up to a max of n.
