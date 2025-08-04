@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.Intervals;
+﻿namespace neetcode.Intervals;
 public class InsertInterval
 {
     public static int[][] Insert(int[][] intervals, int[] newInterval)
