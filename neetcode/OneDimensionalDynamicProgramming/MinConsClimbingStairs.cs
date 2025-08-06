@@ -3,7 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ConstrainedExecution;
 
 namespace neetcode.OneDimensionalDynamicProgramming;
-public static class MinConstClimbingStairs
+public static class MinConsClimbingStairs
 {
     public static int MinCost(int[] cost)
     {
