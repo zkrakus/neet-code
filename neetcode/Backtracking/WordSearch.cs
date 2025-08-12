@@ -8,7 +8,6 @@ public static class WordSearch
         if (board is null || board.Length == 0 || board[0].Length == 0 || word is null || word.Length == 0)
             return false;
 
-
         int rows = board.Length, cols = board[0].Length;
         HashSet<(int, int)> path = new();
         bool dfs(int row, int col, int i)
