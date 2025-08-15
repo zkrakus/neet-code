@@ -22,7 +22,7 @@ public static class ContainerWithMostWater
         while (right > left)
         {
             maxArea = right - left * Math.Min(heights[left], heights[right]);
-            if (heights[left] >= heights[right]) right--;
+            if (heights[left] > heights[right]) right--;
             else left++;
         }
 
