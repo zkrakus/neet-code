@@ -1,4 +1,5 @@
 ﻿namespace neetcode.TwoPointers;
+
 public static class ContainerWithMostWater
 {
     public static int MaxAreaBrute(int[] heights)

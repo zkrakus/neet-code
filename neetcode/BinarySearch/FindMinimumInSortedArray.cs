@@ -1,36 +1,25 @@
-﻿using System.Security.AccessControl;
-
-namespace neetcode.BinarySearch;
+﻿namespace neetcode.BinarySearch;
 public static class FindMinimumInSortedArray
 {
-    public static int FindMin(int[] nums)
+
+    public static int FindMin2(int[] nums)
     {
-        if(nums is null || nums.Length == 0)
+        if (nums is null || nums.Length == 0)
             return int.MinValue;
 
-        int l = 0, r = nums.Length - 1;
-        int res = int.MinValue;
-        while (l <= r)
+        int l = 0, r = nums.Length - 1; // Initialize binary search
+        while (l < r) // Can we binary search?
         {
-            if (nums[l] < nums[r]) // unsure about why this has to be handled seperately.
-            {
-                res = Math.Min(res, nums[l]);
+            if (nums[l] <= nums[r]) // Is our subarray sorted?
                 break;
-            }
 
-            int m = l + (r - l) / 2;
-            if (nums[m] >= nums[l])
-            {
-                l = m + 1;
-                res = Math.Min(nums[r], nums[l]);
-            }
-            else
-            {
-                r = m - 1; // Unsure about this minus 1?
-                res = Math.Min(nums[r], nums[l]);
-            }
+            int m = l + (r - l) / 2; // Find mid
+            if (nums[l] < nums[m]) // Is our left sub array sorted?
+                l = m + 1; // Is so check right unsorted subarray?
+            else // Otherwise check left unsorted subarray
+                r = m;
         }
 
-        return res;
+        return nums[l]; // returned min of sorted subarray
     }
 }
