@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.SlidingWindow;
+﻿namespace neetcode.SlidingWindow;
 public static class BestTimeToBuyAndSellStock
 {
     public static int MaxProfit(int[] prices)

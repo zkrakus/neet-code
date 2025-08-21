@@ -1,7 +1,6 @@
 ﻿namespace neetcode.BinarySearch;
 public static class FindMinimumInSortedArray
 {
-
     public static int FindMin2(int[] nums)
     {
         if (nums is null || nums.Length == 0)
