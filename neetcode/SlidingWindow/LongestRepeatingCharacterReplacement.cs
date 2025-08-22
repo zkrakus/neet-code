@@ -1,69 +1,44 @@
 ﻿namespace neetcode.SlidingWindow;
 public static class LongestRepeatingCharacterReplacement
 {
+
+    // O(n^2)
+    // S(m) : m is the # of unique characters in the string
     public static int CharacterReplacementBruteForce(string s, int k)
     {
-        if (s is null || s.Length == 0)
+        if (s is null)
             return 0;
         if (k >= s.Length)
             return s.Length;
 
-        int res = 0;
-        for(int i = 0; i < s.Length; i++)
+        var res = 0;
+        for(int l = 0; l < s.Length; l++)
         {
-            Dictionary<char, int> count = new();
-            int maxf = 0;
-            for (int j = i; j < s.Length; j++)
+            int localMaxCharCount = 1;
+            Dictionary<char, int> charCount = new();
+            for (int r = l; r < s.Length; l++)
             {
-                if (count.ContainsKey(s[j]))
+                if (charCount.ContainsKey(s[r]))
                 {
-                    count[s[j]]++;
-                    maxf = Math.Max(maxf, count[s[j]]);
-                } 
-                else
+                    charCount[s[r]]++;
+                    localMaxCharCount = Math.Max(localMaxCharCount, charCount[s[r]]);
+                } else
                 {
-                    count[s[j]] = 1;
+                    charCount[s[r]] = 1;
                 }
 
-            }
-        }
-
-    }
-
-    public static int CharacterReplacement(string s, int k)
-    {
-        if (s is null || s.Length == 0)
-            return 0;
-        if (k >= s.Length)
-            return s.Length;
-
-        int l = 0, r = 0;
-        int res = 0;
-        int maxCount = 1;
-        Dictionary<char, int> charCount = new();
-        while (r < s.Length)
-        {
-            if (charCount.TryGetValue(s[r], out int count))
-            {
-                charCount[s[r]]++;
-                maxCount = Math.Max(maxCount, count + 1); 
-            }
-            else
-            {
-                charCount.Add(s[r], 1);
-            }
-                
-            var windowLength = r - l + 1;
-            if(windowLength - maxCount > k)
-            {
-                charCount[s[l]]--;
-            }
-            else
-            {
-
+                if (r - l + 1 - localMaxCharCount <= k)
+                {
+                    res = Math.Max(res, localMaxCharCount);
+                }
             }
         }
 
         return res;
+    }
+
+    public static int CharacterReplacementSlidingWindow(string s, int k)
+    {
+
     }
 }
