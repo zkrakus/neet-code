@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.Trees;
+﻿namespace neetcode.Trees;
 public static class SameBinaryTree
 {
     //public static bool IsSameTree(TreeNode? p, TreeNode? q)
@@ -62,30 +55,6 @@ public static class SameBinaryTree
 
     //    return false;
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // DON"T SCROLL UP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // DON"T SCROLL UP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    // DON"T SCROLL UP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // DON"T SCROLL UP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // DON"T SCROLL UP !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 
 
     public static bool IsSameTree(TreeNode? p, TreeNode? q)
