@@ -37,7 +37,7 @@ internal static class TrappingRainWater
             return 0;
 
         int l = 0, r = heights.Length - 1;
-        int maxLeft = heights[0], maxRight = heights[heights.Length - 1];
+        int maxLeft = heights[0], maxRight = heights[^1];
         int totalTrappedRainWater = 0;
         while (l < r)
         {

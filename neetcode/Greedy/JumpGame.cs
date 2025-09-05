@@ -43,8 +43,8 @@ public static class JumpGame
         Dictionary<int, bool> memo = new();
         bool dfs(int cur)
         {
-            if (memo.ContainsKey(cur))
-                return memo[cur];
+            if (memo.TryGetValue(cur, out bool value))
+                return value;
 
             if (cur >= nums.Length || nums[cur] == 0)
                 return false;
