@@ -52,7 +52,7 @@ public static class MaximumSubarray
     }
 
     // Kadane's sliding window
-    public static (int, int) MaxSubArray(int[] nums)
+    public static (int, int) MaxSubArrayKadanes(int[] nums)
     {
         int curSum = nums[0];
         int maxSum = nums[0];
