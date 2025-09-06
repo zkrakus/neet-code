@@ -3,23 +3,20 @@ public static class FindMedianSortedArrays
 {
     public static double Find(int[] nums1, int[] nums2)
     {
-        int[] A = nums1;
-        int[] B = nums2;
-        int total = A.Length + B.Length;
-        int half = (total + 1) / 2;
+        if (nums1 is null) throw new ArgumentNullException(nameof(nums1));
+        if (nums2 is null) throw new ArgumentNullException(nameof(nums2));
 
+        var A = nums1;
+        var B = nums2;
         if (B.Length < A.Length)
-        {
-            int[] temp = A;
-            A = B;
-            B = temp;
-        }
+            (A, B) = (B, A);
 
-        int l = 0;
-        int r = A.Length;
+        int total = A.Length + B.Length;
+        int half = total / 2;
+        int l = 0, r = A.Length;
         while (l <= r)
         {
-            int i = (l + r) / 2;
+            int i = l + (r - l) / 2;
             int j = half - i;
 
             int Aleft = i > 0 ? A[i - 1] : int.MinValue;
@@ -29,21 +26,34 @@ public static class FindMedianSortedArrays
 
             if (Aleft <= Bright && Bleft <= Aright)
             {
-                if (total % 2 != 0)
-                {
-                    return Math.Max(Aleft, Bleft);
-                }
+                if (total % 2 == 1)
+                    return Math.Min(Aright, Bright);
+
                 return (Math.Max(Aleft, Bleft) + Math.Min(Aright, Bright)) / 2.0;
             }
             else if (Aleft > Bright)
-            {
                 r = i - 1;
-            }
             else
-            {
                 l = i + 1;
-            }
         }
+
         return -1;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

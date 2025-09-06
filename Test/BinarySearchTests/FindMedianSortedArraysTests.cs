@@ -35,8 +35,8 @@ public class FindMedianSortedArraysTests
     }
 
     [Theory]
-    //[MemberData(nameof(Cases))]
-    [InlineData(new[] { 1, 3 }, new[] { 2,4,5,6 }, 3.5)]
+    [MemberData(nameof(Cases))]
+    //[InlineData(new[] { 1, 3 }, new[] { 2,4,5,6 }, 3.5)]
     public void Find_ReturnsExpected_MemberData(int[] a, int[] b, double expected)
     {
         var result = FindMedianSortedArrays.Find(a, b);
