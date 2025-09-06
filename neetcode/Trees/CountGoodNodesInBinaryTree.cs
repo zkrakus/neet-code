@@ -27,8 +27,8 @@ public static class CountGoodNodesInBinaryTree
         return count;
     }
 
-    public static int GoodNodesBreadthFirstSearch(TreeNode root)
-    {
+    //public static int GoodNodesBreadthFirstSearch(TreeNode root)
+    //{
 
-    }
+    //}
 }
