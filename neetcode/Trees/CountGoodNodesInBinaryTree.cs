@@ -1,7 +1,7 @@
 ﻿namespace neetcode.Trees;
 public static class CountGoodNodesInBinaryTree
 {
-    public static int GoodNodes(TreeNode root)
+    public static int GoodNodesDepthFirstSearch(TreeNode root)
     {
         int count = 0;
         if (root == null) 
@@ -25,5 +25,10 @@ public static class CountGoodNodesInBinaryTree
         count = DfsTreeCount(root);
 
         return count;
+    }
+
+    public static int GoodNodesBreadthFirstSearch(TreeNode root)
+    {
+
     }
 }
