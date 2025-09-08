@@ -30,7 +30,7 @@ public static class CopyList
     }
 
     // t: O(n) :: recursive function | for each node in we copy.
-    // s: O(t) :: n pushes to the stack for recursive calls.
+    // s: O(n) :: n pushes to the stack for recursive calls.
     public static ListNode? CopyRecursion(ListNode? root)
     {
         if (root is null)
@@ -43,7 +43,7 @@ public static class CopyList
     }
 
     // t: O(n) :: Iterate though LL, we just handle the first iteration explicitly outside the loop.
-    // s: O(t) :: n pushes to the stack for recursive calls.
+    // s: O(1) :: Linear space.
     public static ListNode? CopyHandleHeadFirst(ListNode? root)
     {
         if (root is null)
@@ -58,5 +58,25 @@ public static class CopyList
         }
 
         return newHead;
+    }
+
+    // t: O(n) :: Iterate though LL, we just handle edge cases with sentinel node.
+    // s: O(1) :: Linear space.
+    public static ListNode? CopyWithDummyNode(ListNode? root)
+    {
+        if (root is null)
+            return null!;
+
+        ListNode? sentinel = new(0), tail = sentinel, cur = root; // Create a dummySentinel that initializes prev and tracks the newHead (sentinel.next).
+        while (cur != null)
+        {
+            var copy = new ListNode(cur.val);
+            tail.next = copy; // Whole point of tail is just to link up tail.next 
+            tail = copy; // ... as soon as you link it just move it forward.
+
+            cur = cur.next;
+        }
+
+        return sentinel.next;
     }
 }
