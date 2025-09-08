@@ -23,6 +23,7 @@ public static class MinSwapsToAvoidAffinity
                     conflictingIndices.Add(i);
             }
 
+            // If no indexes conflict. We're done.
             int conflictCount = conflictingIndices.Count;
             if (conflictCount == 0)
                 return 0;
@@ -34,19 +35,19 @@ public static class MinSwapsToAvoidAffinity
 
             foreach (int i in conflictingIndices)
             {
-                int val = fileSizes[i];
-                conflictFrequency.TryGetValue(val, out int count);
-                conflictFrequency[val] = ++count;
+                int conflictingValue = fileSizes[i];
+                conflictFrequency.TryGetValue(conflictingValue, out int count);
+                conflictFrequency[conflictingValue] = ++count;
 
                 if (count > dominantCount)
                 {
                     dominantCount = count;
-                    dominantValue = val;
+                    dominantValue = conflictingValue;
                 }
             }
 
             // 3) If no single value dominates more than half, just rotate them.
-            if (dominantCount <= conflictCount / 2)
+            if (dominantCount <= conflictCount / 2) // divide in half because we can fix 2 conflicts with 1 swap.
                 return (conflictCount + 1) / 2;
 
             // 4) Otherwise, calculate how many extra non-dominant values we need.
