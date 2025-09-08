@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace neetcode.LinkedList;
 public static class CopyRandomList
@@ -7,36 +8,26 @@ public static class CopyRandomList
     {
         if (head is null)
             return null;
+        
+        Dictionary<ListNode, ListNode> oldToNew =  new();
 
         ListNode cur = head;
-        var cur = root;
-        ListNode? prev = null!;
-        ListNode? newRoot = null!;
-        Dictionary<ListNode, ListNode> originalToNewMap =  new();
         while (cur != null)
         {
-            ListNode copy = new(cur.val);
-            if (newRoot is null)
-                newRoot = copy;
-            else 
-                prev.next = copy;
-
-            originalToNewMap.Add(cur, copy);
-            prev = copy;
+            ListNode copy = new ListNode(cur.val);
+            oldToNew[cur] = copy;
             cur = cur.next;
         }
-        
-        cur = root;
-        var newCur = newRoot;
-        while (cur != null || newCur != null)
-        {
-            if (cur?.other != null)
-                newCur!.other = originalToNewMap[cur.other];
 
-            cur = cur?.next;
-            newCur = newCur?.next;
+        cur = head;
+        while (cur != null)
+        {
+            ListNode copy = oldToNew[cur];
+            copy.next = cur.next != null ? oldToNew[cur.next] : null;
+            copy.other = cur.other != null ? oldToNew[cur.other] : null;
+            cur = cur.next!;
         }
 
-        return newRoot;
+        return head != null ? oldToNew[head] : null;
     }
 }
