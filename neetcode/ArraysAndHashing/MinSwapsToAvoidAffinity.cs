@@ -46,12 +46,13 @@ public static class MinSwapsToAvoidAffinity
                 }
             }
 
-            // 3) If no single value dominates more than half, just rotate them.
-            if (dominantCount <= conflictCount / 2) // divide in half because we can fix 2 conflicts with 1 swap.
+            // 3) If no single value dominates more than half of the conflicts, we know we can swap conflicts / 2 just among themselves times to fix.
+            if (dominantCount <= conflictCount / 2) // divide in half because we can fix 2 conflicts with 1 swap. 
                 return (conflictCount + 1) / 2;
 
             // 4) Otherwise, calculate how many extra non-dominant values we need.
-            int extrasNeeded = 2 * dominantCount - conflictCount;
+            // (conflicts - dominantConflicts) = CountOfNonDominantConflicts
+            int extrasNeeded = (2 * dominantCount) - conflictCount;
 
             // Count available "import" spots from outside conflicts.
             int importableCount = 0;
