@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.LinkedList;
+﻿namespace neetcode.LinkedList;
 public static class LinkedListCycleDetection
 {
     public static bool HasCycle(ListNode head)

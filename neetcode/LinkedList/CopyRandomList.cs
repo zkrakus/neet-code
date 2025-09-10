@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace neetcode.LinkedList;
+﻿namespace neetcode.LinkedList;
 public static class CopyRandomList
 {
     public static ListNode? CopyRandomListTwoPass(ListNode head)
@@ -16,7 +13,7 @@ public static class CopyRandomList
         {
             ListNode copy = new ListNode(cur.val);
             oldToNew[cur] = copy;
-            cur = cur.next;
+            cur = cur.next!;
         }
 
         cur = head;
