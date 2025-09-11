@@ -43,8 +43,6 @@ public static class BalancedBinaryTree
     //        return (maxheight, true);
     //}
 
-
-
     public static bool IsBalanced(TreeNode? root)
     {
         bool isBalanced = true;
@@ -64,33 +62,8 @@ public static class BalancedBinaryTree
             return ++greaterDepth;
         }
 
-
         _ = IsBalancedRec(root, 0);
 
         return isBalanced;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

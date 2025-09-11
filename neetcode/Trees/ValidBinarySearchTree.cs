@@ -1,34 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.Trees;
+﻿namespace neetcode.Trees;
 public static class ValidBinarySearchTree
 {
-    //public bool IsValidBST(TreeNode root)
-    //{
-    //    if (root is null)
-    //        return true;
+    public static bool IsValidBST(TreeNode root)
+    {
+        bool ValidateBst(TreeNode? node, int min = int.MinValue, int max = int.MaxValue)
+        {
+            if (node is null)
+                return true;
 
-    //    Queue<()> queue = new();
-    //    queue.Enqueue(root);
-    //    while (queue.Count > 0)
-    //    {
-    //        TreeNode? node = queue.Dequeue();
-    //        if (node is null)
-    //            continue;
+            if (node.val <= min || node.val >= max)
+                return false;
 
-    //        if (node.val >= max)
-    //        {
+            return ValidateBst(node.left, min, node.val) && ValidateBst(node.right, node.val, max);
+        }
 
-    //        }
-
-
-
-    //    }
-
-
-    //}
+        return IsValidBST(root);
+    }
 }
