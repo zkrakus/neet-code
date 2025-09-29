@@ -17,15 +17,12 @@ public static class FindKthLargestElementInAnArray
         return minHeap.Peek();
     }
 
-    // t(n): O(n log(k))
+    // t(n): O(n) on average. O(n^2) worst case.
     // s(n): O(k);
     // Quick select algorithm: 
-   
-
-    // Come back to understand better.
-
     public static int FindKthLargestQuickSelect(int[] nums, int k)
     {
+
         k = nums.Length - k;
         int QuickSelect(int left, int right)
         {

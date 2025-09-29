@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace neetcode.HeapAndPriorityQueue;
+﻿namespace neetcode.HeapAndPriorityQueue;
 public static class LastStoneWeight
 {
     public static int FindLastStoneWeight(int[] stones)
