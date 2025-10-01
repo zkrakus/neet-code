@@ -91,4 +91,23 @@ public static class JumpGame
 
         return dp[0];
     }
+
+
+    public static bool CanJump(int[] nums)
+    {
+        bool CanJumpDfs(int i)
+        {
+            if (i == nums.Length) return false;
+            if (i == nums.Length - 1) return true;
+
+            var boundary = Math.Min(nums[i], nums.Length - 1);
+            for(int j = boundary; j > 0; j--)
+                if (CanJumpDfs(i + j))
+                    return true;
+
+            return false;
+        }
+
+        return CanJumpDfs(0);
+    }
 }
