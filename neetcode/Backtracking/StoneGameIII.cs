@@ -13,36 +13,52 @@
 /// 
 /// Return "Alice" if Alice will win, "Bob" if Bob will win, or "Tie" if they will end the game with the same score.
 /// </summary>
-public static class StoneGameIII
+public static class GoldCoinGame
 {
-    public static string MaxAdvantage(int[] stoneValues)
+    public static string Solve(int n, int p, int m, int x)
     {
-        int n = stoneValues.Length;
-        int DfsMaxStoneAdvantage(int l)
+        // If Steve has no legal move, he loses immediately
+        var nexts = NextPositions(n, m, p);
+        if (nexts.Count == 0) return "Harvey";
+
+        // 1) Immediate win?
+        if (CanReachInOne(n, m, p, x)) return "Steve";
+
+        // 2) If EVERY Steve move lets Harvey win in 1, Harvey forces a win.
+        bool harveyForces = true;
+        foreach (int q in nexts)
         {
-            if (l >= n)
-                return 0;
-
-            int myBestAdvantage = int.MinValue;
-            int currentStoneSum = 0;
-            for(int x = l; x < n && x < l + 3; x++)
-            {
-                currentStoneSum += stoneValues[x];
-                int opponentAdvantage = DfsMaxStoneAdvantage(x + 1);
-                int myAdvantage = currentStoneSum - opponentAdvantage;
-                myBestAdvantage = Math.Max(myBestAdvantage, myAdvantage);
-            }
-
-            return myBestAdvantage;
+            if (!CanReachInOne(n, m, q, x)) { harveyForces = false; break; }
         }
+        return harveyForces ? "Harvey" : "Draw";
+    }
 
-        int advantage = DfsMaxStoneAdvantage(0);
+    // Check if from position 'y' you can reach 'x' in ONE legal reversal.
+    // Window [L, R] of length m must contain y; after reversing, coin goes to (L+R - y).
+    private static bool CanReachInOne(int n, int m, int y, int x)
+    {
+        int Lmin = Math.Max(1, y - (m - 1));
+        int Lmax = Math.Min(y, n - m + 1);
+        if (Lmin > Lmax) return false; // no legal window
 
-        if (advantage == 0)
-            return "Draw";
-        else if (advantage > 0)
-            return "Alice";
-        else
-            return "Bob";
+        // Solve x = (2L + m - 1) - y  =>  L = (x + y - (m - 1)) / 2
+        int numer = x + y - (m - 1);
+        if ((numer & 1) != 0) return false;          // parity mismatch
+        int L = numer / 2;
+        return L >= Lmin && L <= Lmax;
+    }
+
+    // All positions reachable from 'y' in ONE move (at most m, clamped at edges).
+    private static List<int> NextPositions(int n, int m, int y)
+    {
+        var list = new List<int>();
+        int Lmin = Math.Max(1, y - (m - 1));
+        int Lmax = Math.Min(y, n - m + 1);
+        for (int L = Lmin; L <= Lmax; L++)
+        {
+            int R = L + m - 1;
+            list.Add(L + R - y); // mirror of y in [L..R]
+        }
+        return list;
     }
 }
