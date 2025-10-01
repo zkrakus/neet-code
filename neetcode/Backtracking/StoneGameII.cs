@@ -55,7 +55,7 @@ public static class StoneGameII
     public static int MaxStonesMemoPrefixSum(int[] piles)
     {
         int n = piles.Length;
-        var pilesPrefixSum = new int[n + 1];
+        var pilesPrefixSum = new int[n + 1]; // Calc prefix sum. Start with 0 at 0 index to avoid bounds issues
         for (int i = 0; i < n; i++)
             pilesPrefixSum[i + 1] = pilesPrefixSum[i] + piles[i];
 
@@ -68,9 +68,9 @@ public static class StoneGameII
             if (dfsMemo.TryGetValue((l, m), out int val)) // Already solved.
                 return val;
 
-            int remainingSum = piles.Skip(l).Sum();
+            int remainingSum = pilesPrefixSum[n] - pilesPrefixSum[l]; // sum at last position minus sum up to current point.
             if (n - l <= 2 * m) // If we can select all remaining piles, when playing optimally we should do so.
-                return piles.Skip(l).Sum();
+                return remainingSum;
 
             int opponentsWorstMove = int.MaxValue;
             for (int x = 1; x <= 2 * m; x++) // Apply minimax for all possible ... your best move is the worst move for the opponent.
