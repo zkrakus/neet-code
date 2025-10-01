@@ -93,7 +93,7 @@ public static class JumpGame
     }
 
 
-    public static bool CanJump(int[] nums)
+    public static bool CanJumpBruteForce(int[] nums)
     {
         bool CanJumpDfs(int i)
         {
@@ -109,5 +109,52 @@ public static class JumpGame
         }
 
         return CanJumpDfs(0);
+    }
+
+    public static bool CanJumpRecursionDpTopDownMemo(int[] nums)
+    {
+        var dfsMemo = new Dictionary<int, bool>();
+        bool CanJumpDfs(int i)
+        {
+            if (dfsMemo.TryGetValue(i, out bool val))
+                return val;
+
+            if (i == nums.Length) return false;
+            if (i == nums.Length - 1) return true;
+
+            var boundary = Math.Min(nums[i], nums.Length - 1 - i);
+            for (int j = boundary; j > 0; j--)
+                if(CanJumpDfs(i + j))
+                    return dfsMemo[i] = true;
+
+            dfsMemo[i] = false;
+            return false;
+        }
+
+        return CanJumpDfs(0);
+
+
+    }
+
+    public static bool CanJumpBottomUp(int[] nums)
+    {
+        int n = nums.Length;
+        bool[] dp = new bool[n];
+        dp[n - 1] = true;
+
+        for (int i = n - 2; i >= 0; i--)
+        {
+            int maxJump = Math.Min(nums[i], n - 1 - i);
+            for (int j = maxJump; j > i; j--)
+            {
+                if (dp[i + j])
+                {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+
+        return dp[0];
     }
 }
