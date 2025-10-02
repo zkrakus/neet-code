@@ -132,8 +132,6 @@ public static class JumpGame
         }
 
         return CanJumpDfs(0);
-
-
     }
 
     public static bool CanJumpBottomUp(int[] nums)
@@ -156,5 +154,22 @@ public static class JumpGame
         }
 
         return dp[0];
+    }
+
+    public static bool CanJumpGreedy(int[] nums)
+    {
+        int n = nums.Length;
+        int farthest = 0; 
+        for (int i = 0; i < n; i++)
+        {
+            if (i > farthest)
+                return false; 
+
+            farthest = Math.Max(farthest, i + nums[i]);
+            if (farthest >= n - 1)
+                return true; 
+        }
+
+        return true; 
     }
 }
