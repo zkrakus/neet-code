@@ -6,31 +6,30 @@ public static class PermutationInString
         Dictionary<char, int> charCount = new();
         foreach (char c in s1)
         {
-            if (!charCount.ContainsKey(c)) 
+            if (!charCount.ContainsKey(c))
                 charCount[c] = 1;
             else
                 charCount[c]++;
         }
 
         Dictionary<char, int> windowCharCount = new();
-        for (int i = 0; i < s1.Length; i++) {
+        for (int i = 0; i < s1.Length; i++)
+        {
             if (!windowCharCount.ContainsKey(s2[i]))
                 windowCharCount[s2[i]] = 1;
             else
                 windowCharCount[s2[i]]++;
         }
 
-        int l = 0, r = 1;
+        int l = 0, r = 0;
         while (r < s2.Length)
         {
-            if (r - l + 1 < s1.Length)
-            {
-                r++;
-                continue;
-            }
+            if (!windowCharCount.ContainsKey(s2[r]))
+                windowCharCount[s2[r]] = 1;
+            else
+                windowCharCount[s2[r]]++;
 
-            l++;
-            r++;
+
         }
     }
 }
