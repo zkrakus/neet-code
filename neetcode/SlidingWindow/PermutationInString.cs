@@ -32,57 +32,57 @@ public static class PermutationInString
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static bool CheckInclusionSlidingWindowWithPointers(string s1, string s2)
     {
         if (s1.Length > s2.Length)
             return false;
 
-
-        Dictionary<char, int> charHash1 = new Dictionary<char, int>();
-        Dictionary<char, int> charHash2 = new Dictionary<char, int>();
-        for (int i = 0; i < s1.Length; i++)
+        Dictionary<char, int> charHash1 = new();
+        Dictionary<char, int> charHash2 = new();
+        int l = 0, r = s1.Length;
+        while (r < s2.Length)
         {
-            charHash1[s1[i]]++;
-            charHash2[s2[i]]++;
+            if (r < s1.Length)
+            {
+                charHash1[s1[r]] = charHash1.GetValueOrDefault(s1[r]) + 1;
+                charHash2[s2[r]] = charHash2.GetValueOrDefault(s2[r]) + 1;
+                r++;
+                continue; 
+            }
+
+            charHash2[s2[l]]--;
+            if (charHash2[s2[l]] == 0)
+                charHash2.Remove(s1[l]);
+
+            charHash2[s2[r]] = charHash2.GetValueOrDefault(s2[r]) + 1;
+
+            if (charHash1.All(kvp => charHash2.TryGetValue(kvp.Key, out int value) && value == kvp.Value))
+                return true;
+
+            l++;
+            r++;
         }
 
-        if (charHash1.All(kvp => charHash2.TryGetValue(kvp.Key, out int value) && value == kvp.Value)) // lol
-            return true;
+        return false;
     }
+
+
+
+
+
+
+
+
+
+
+    // There is apparently an even better way.
+
+
+
+
+
+
+
+
+
 }
