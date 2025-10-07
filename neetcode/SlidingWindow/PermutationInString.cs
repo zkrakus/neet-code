@@ -1,35 +1,88 @@
 ﻿namespace neetcode.SlidingWindow;
 public static class PermutationInString
 {
-    public static bool CheckInclusion(string s1, string s2)
+    public static bool CheckInclusionBadSlidingWindow(string s1, string s2)
     {
-        Dictionary<char, int> charCount = new();
-        foreach (char c in s1)
+        if (s1.Length > s2.Length) 
+            return false;
+
+        var alpahHash1 = new int[26];
+        var alpahHash2 = new int[26];
+
+        // Initialize our window
+        for(int i = 0; i < s1.Length; i++)
         {
-            if (!charCount.ContainsKey(c))
-                charCount[c] = 1;
-            else
-                charCount[c]++;
+            alpahHash1[s1[i] - 'a']++;
+            alpahHash2[s2[i] - 'a']++;
         }
 
-        Dictionary<char, int> windowCharCount = new();
+        if (alpahHash1.SequenceEqual(alpahHash2))
+            return true;
+
+        // Iterate through windows
+        for (int i = s1.Length; i < s2.Length; i++)
+        {
+            alpahHash2[s2[i] - 'a']++;                 // add cur char to hash
+            alpahHash2[s2[i - s1.Length - 1] - 'a']--; // remove left window from hash
+
+            if(alpahHash1.SequenceEqual(alpahHash2))
+                return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static bool CheckInclusionSlidingWindowWithPointers(string s1, string s2)
+    {
+        if (s1.Length > s2.Length)
+            return false;
+
+
+        Dictionary<char, int> charHash1 = new Dictionary<char, int>();
+        Dictionary<char, int> charHash2 = new Dictionary<char, int>();
         for (int i = 0; i < s1.Length; i++)
         {
-            if (!windowCharCount.ContainsKey(s2[i]))
-                windowCharCount[s2[i]] = 1;
-            else
-                windowCharCount[s2[i]]++;
+            charHash1[s1[i]]++;
+            charHash2[s2[i]]++;
         }
 
-        int l = 0, r = 0;
-        while (r < s2.Length)
-        {
-            if (!windowCharCount.ContainsKey(s2[r]))
-                windowCharCount[s2[r]] = 1;
-            else
-                windowCharCount[s2[r]]++;
-
-
-        }
+        if (charHash1.All(kvp => charHash2.TryGetValue(kvp.Key, out int value) && value == kvp.Value)) // lol
+            return true;
     }
 }
