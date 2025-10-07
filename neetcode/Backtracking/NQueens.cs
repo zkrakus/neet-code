@@ -8,50 +8,46 @@ public static class NQueens
         for (int i = 0; i < n; i++)
             board[i] = Enumerable.Repeat('.', n).ToArray();
 
-        HashSet<int> occupiedRows = new();
         HashSet<int> occupiedCols = new();
         HashSet<int> posDiag = new();
         HashSet<int> negDiag = new();
-        void SolveNQueensRecur(int row, int col)
+        void SolveNQueensRecur(int row)
         {
-            // Bound Checks && occupation checks
-            if (row < 0 || row >= n || col < 0 || col >= n
-                || occupiedRows.Contains(row) || occupiedCols.Contains(col) || negDiag.Contains(row - col) || posDiag.Contains(row + col))
-                return;
-
-            // If it's a valid move, and we are on the last row, we found a solution.
-            if (row == n - 1)
+            // N queens have been placed
+            if (row == n)
             {
-                var newBoard = new List<string>();
+                var boardSnapshot = new List<string>();
                 for (int i = 0; i < n; i++)
-                    newBoard[i] = new string(board[i]);
+                    boardSnapshot.Add(new string(board[i]));
 
-                result.Add(newBoard);
+                result.Add(boardSnapshot);
                 return;
             }
 
-
-            // for each of the columns on the current row, recursively check all solutions
-            occupiedRows.Add(row);
-            for (int i = 0; i < n; i++)
+            for (int col = 0; col < n; col++) // for each of the columns on the current row, recursively check all solutions
             {
-                occupiedCols.Add(i);
-                posDiag.Add(row + i);
-                occupiedRows.Add(row - i);
-                board[row][col] = 'i';
+                // Bound Checks && occupation checks
+                // Note: We always ensure row is unique by how we traverse the board so we don't need to check if there is only 1 queen per row.
+                if (occupiedCols.Contains(col) 
+                    || negDiag.Contains(row - col) 
+                    || posDiag.Contains(row + col))
+                    continue;
 
-                SolveNQueensRecur(row + 1, 0);
+                board[row][col] = 'Q';
+                occupiedCols.Add(col);
+                posDiag.Add(row + col);
+                negDiag.Add(row - col);
 
+                SolveNQueensRecur(row + 1);
 
-                occupiedCols.Remove(i);
-                occupiedRows.Remove(row);
-                posDiag.Remove(row + i);
-                occupiedRows.Remove(row - i);
                 board[row][col] = '.';
+                occupiedCols.Remove(col);
+                posDiag.Remove(row + col);
+                negDiag.Remove(row - col);
             }
         }
 
-        SolveNQueensRecur(0, 0);
+        SolveNQueensRecur(0);
 
         return result;
     }
