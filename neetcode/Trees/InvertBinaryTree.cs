@@ -1,39 +1,41 @@
 ﻿namespace neetcode.Trees;
 public class InvertBinaryTree
 {
-    public TreeNode? InvertTree(TreeNode? root)
+    public static TreeNode? InvertTreeDfs(TreeNode? root)
     {
-        if (root == null)
-            return root;
+        if (root is null) return root;
 
-        var left = InvertTree(root.left);
-        var right = InvertTree(root.right);
+        void TreeTraverseInvertDfs(TreeNode node)
+        {
+            if (node is null) return;
 
-        root.left = right;
-        root.right = left;
+            TreeTraverseInvertDfs(node.left);
+            TreeTraverseInvertDfs(node.right);
+
+            (node.left, node.right) = (node.right, node.left);
+        }
+
+        TreeTraverseInvertDfs(root);
 
         return root;
     }
 
-    public TreeNode? InvertTreeNonRecursiveBFS(TreeNode? root)
+    public static TreeNode? InvertTreeBfs(TreeNode? root)
     {
-        if (root == null)
-            return null;
+        if (root is null) return root;
 
-        var queue = new Queue<TreeNode>();
+        Queue<TreeNode> queue = new();
         queue.Enqueue(root);
 
         while (queue.Count > 0)
         {
-            var current = queue.Dequeue();
+            var cur = queue.Dequeue();
+            if (cur is null) continue;
 
-            // swap
-            (current.left, current.right) = (current.right, current.left);
+            queue.Enqueue(cur.left);
+            queue.Enqueue(cur.right);
 
-            if (current.left != null)
-                queue.Enqueue(current.left);
-            if (current.right != null)
-                queue.Enqueue(current.right);
+            (cur.left, cur.right) = (cur.right, cur.left);
         }
 
         return root;

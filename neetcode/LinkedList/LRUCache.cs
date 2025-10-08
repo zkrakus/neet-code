@@ -1,17 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace neetcode.LinkedList;
-
-
-public class DoublyLinkedList
-{
-    public DoublyLinkedList() { }
-
-    public int Key { get; set; }
-    public int Val { get; set; }
-    public DoublyLinkedList? Left { get; set; }
-    public DoublyLinkedList? Right { get; set; }
-}
+﻿namespace neetcode.LinkedList;
 
 public class LRUCache
 {
@@ -34,7 +21,7 @@ public class LRUCache
             PopNode(node);
             PushMru(node);
 
-            return node.Val;
+            return node.Value;
         }
 
         return -1;
@@ -45,7 +32,7 @@ public class LRUCache
         DoublyLinkedList node;
         if (_valueMap.TryGetValue(key, out node))
         {
-            node.Val = value;
+            node.Value = value;
             PopNode(node);
             PushMru(node);
 
@@ -57,7 +44,7 @@ public class LRUCache
             PopNode(LRUSentintel.Right);
         }
 
-        node = new DoublyLinkedList() { Key = key, Val = value };
+        node = new DoublyLinkedList() { Key = key, Value = value };
         _valueMap[key] = node;
 
         PushMru(node);
@@ -79,5 +66,19 @@ public class LRUCache
         node.Right = MRUSentintel;
         node.Left = temp;
         _valueMap[node.Key] = node;
+    }
+
+    public class DoublyLinkedList
+    {
+        public DoublyLinkedList(int key = 0, int value = 0)
+        {
+            Key = key;
+            Value = value;
+        }
+
+        public int Key { get; set; }
+        public int Value { get; set; }
+        public DoublyLinkedList? Left { get; set; }
+        public DoublyLinkedList? Right { get; set; }
     }
 }

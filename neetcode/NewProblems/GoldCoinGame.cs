@@ -14,8 +14,8 @@ public static class GoldCoinGame
     /// <param name="m"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    public static string Solve(int n, int p, int m, int x)
-    {
+    //public static string Solve(int n, int p, int m, int x)
+    //{
 
-    }
+    //}
 }
